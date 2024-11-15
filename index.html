@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sistema de Gestión de Datos</title>
+        <!-- Add Font Awesome link -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+      </head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">
+      <img src="logo.png" alt="Logo"> <!-- Replace with your logo image -->
+    </div>
+
+    <div>
+      <ul>
+        <li><i class="fas fa-home"></i> Inicio</li> <!-- Home icon -->
+        <li><i class="fas fa-file-invoice-dollar"></i> Cotizaciones</li> <!-- Money icon -->
+        <li><i class="fas fa-clipboard-list"></i> Reservas</li> <!-- Clipboard icon for Reservas -->
+        <li><i class="fas fa-ticket-alt"></i> Vouchers</li> <!-- Ticket icon for Vouchers -->
+        <li><i class="fas fa-file-invoice"></i> Facturas</li> <!-- Invoice icon for Facturas -->
+        <li><i class="fas fa-chart-line"></i> Reportes</li> <!-- Chart icon for Reportes -->
+        <li><i class="fas fa-calendar-alt"></i> Agenda</li> <!-- Calendar icon -->
+        <li><i class="fas fa-suitcase"></i> Paquetes</li> <!-- Tree icon instead of Palm tree -->
+        <li><i class="fas fa-map-marker-alt"></i> Tours</li> <!-- Map icon for Tours -->
+        <li><i class="fas fa-building"></i> Agencias</li> <!-- Building icon for Agencias -->
+        <li><i class="fas fa-truck"></i> Proveedores</li> <!-- Truck icon for Proveedores -->
+        <li><i class="fab fa-instagram"></i> Estadísticas de IG</li> <!-- Instagram icon -->
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Header -->
+    <header>
+        <h1>Sistema de gestión de datos</h1>
+        <div class="user-info">
+          <span>Israel</span>
+          <i class="fas fa-user user-icon"></i> <!-- User icon instead of image -->
+        </div>
+      </header>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn red"><i class="fas fa-plus"></i> Crear nueva cotización</button> <!-- Add icon to the button -->
+        <button class="btn purple"><i class="fas fa-plus"></i> Hacer nueva reserva</button> <!-- Add icon to the button -->
+        <button class="btn green"><i class="fas fa-plus"></i> Crear nueva factura</button> <!-- Add icon to the button -->
+      </div>
+  
+
+      <!-- Dashboard -->
+      <div class="dashboard">
+        <div class="dashboard-header">
+          <div class="dashboard-title">Panel informativo</div>
+          <div class="dashboard-date">
+            <span>Fecha</span>
+            <select>
+              <option>Noviembre, 2024</option>
+            </select>
+          </div>
+        </div>
+        <div class="dashboard-cards">
+          <div class="card">
+            <h2>Total de reservas</h2>
+            <div class="number">15</div>
+          </div>
+          <div class="card">
+            <h2>Próximos tours</h2>
+            <div class="number">11</div>
+          </div>
+          <!-- New "Ingresos $" and "Ganancias $" cards -->
+          <div class="card">
+            <h2>Ingresos</h2>
+            <div class="number small">5.000.000</div> <!-- Adjusted font size for number -->
+            <span>Cop</span>
+          </div>
+          <div class="card">
+            <h2>Ganancias</h2>
+            <div class="number small">2.500.000</div> <!-- Adjusted font size for number -->
+            <span>Cop</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
