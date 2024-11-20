@@ -1,0 +1,166 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%; /* Ensure full height for scrolling */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    font-family: Arial, sans-serif;
+
+}
+
+/* Layout Container */
+.layout {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: flex-start; /* Align items to the top */
+    height: 100%; /* Full height */
+    padding: 20px;
+    position: relative; /* For positioning the top-right button */
+}
+
+/* Main Content */
+
+.main-content {
+    width: 100%; /* Make the main content wide */
+    max-width: 1200px; /* Limit maximum width */
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align sections from the top */
+    min-height: 100vh; /* Allow scrolling */
+    gap: 40px; /* Add space between sections */
+    margin-top: 110px; /* Add space to push content down */
+}
+
+/* Sections Styling */
+
+section {
+    background-color: #c6c5c5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table td {
+    padding: 10px;
+    border: 1px solid #8c8c8c;
+}
+
+table input, table select, table textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+/* Specific styling for small buttons under "Agregar hotel" and "Agregar actividad" */
+button.btn.small {
+    padding: 8px 16px; /* Smaller padding for compact size */
+    background-color: #5a5a5a; /* Same dark gray as other buttons */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; /* Slightly smaller border radius */
+    font-size: 16px; /* Smaller font size for small buttons */
+    display: inline-flex; /* Ensures the icon and text align nicely */
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+}
+
+/* Hover effect for small buttons */
+button.btn.small:hover {
+    background-color: #777; /* Same hover effect as larger buttons */
+}
+
+/* Header */
+header {
+    display: flex; /* Aligns the children in a row */
+    justify-content: space-between; /* Places the title and user info at opposite ends */
+    align-items: center; /* Vertically aligns items */
+    background-color: #757575; /* Sets the header background color */
+    padding: 10px 20px; /* Adds padding inside the header */
+    height: 70px; /* Sets the header's height */
+    color: white; /* Sets the font color to white */
+}
+
+/* Logo Image */
+header .logo {
+    width: 250px; /* Adjust the logo size */
+    height: auto; /* Keeps the aspect ratio of the image */
+}
+
+/* Title in Header */
+header h1 {
+    font-size: 32px; /* Title size */
+    margin: 0; /* Remove any default margin */
+    flex-grow: 1; /* Allow the title to take up available space */
+    text-align: left; /* Ensure text is aligned to the left side */
+    margin-left: 48px; /* Adds space between the left edge and title */
+
+}
+
+
+/* Top left button Styles (Inicio, Guardar, Crear voucher)  */
+
+/* Adjust the top-left buttons position */
+
+.top-buttons {
+    position: relative; 
+    top: 100px;
+    left: 180px;
+    z-index: 10; /* This ensures that the .top-buttons are always in front of other elements. */
+}
+
+/* Top Buttons with Hover Effects */
+.top-buttons .btn {
+    padding: 14px 26px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 18px;
+    margin-right: 10px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.top-buttons .btn.gray {
+    background-color: #777;
+}
+
+.top-buttons .btn.gray:hover {
+    background-color: #5a5a5a;
+    transform: scale(1.05);
+}
+
+.top-buttons .btn.red {
+    background-color: #e63946;
+}
+
+.top-buttons .btn.red:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
+
+.top-buttons .btn.blue {
+    background-color: #6c5ce7;
+}
+
+.top-buttons .btn.blue:hover {
+    background-color: #5a4bdb;
+    transform: scale(1.05);
+}
+
