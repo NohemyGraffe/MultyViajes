@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Reserva</title>
+  <link rel="stylesheet" href="reservas.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <img src="logo.png" alt="Logo" class="logo"> <!-- Logo image on the left side -->
+    <h1>Sistema de gestión de datos</h1>
+</header>
+    
+  <!-- Top Buttons -->
+  <div class="top-buttons">
+    <button class="btn gray">Inicio</button> 
+    <button class="btn red">Guardar</button>
+    <button class="btn blue">Descargar reserva</button>
+    <div class="cotizacion-box">
+        <label for="cotizacion-id" class="cotizacion-label">Obtener cotización</label>
+        <input type="text" id="cotizacion-id" placeholder="ID de cotización" class="cotizacion-input">
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="layout">
+    <!-- Main Content Section -->
+    <div class="main-content">
+      <h2>Crear reserva</h2>
+
+      <!-- Hotel Information -->
+      <section class="hotel-info">
+        <h3>Información del hotel</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre del hotel</th>
+              <th>Tipo de habitación</th>
+              <th>No. de huéspedes</th>
+              <th>Fechas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" placeholder="Ingrese el nombre" required></td>
+              <td><input type="text" placeholder="Ej. Doble, Suite" required></td>
+              <td><input type="number" required></td>
+              <td><input type="date" required> - <input type="date" required></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn small"><i class="fas fa-plus"></i> Agregar hotel</button>
+      </section>
+
+      <!-- Itinerary -->
+      <section class="itinerary">
+        <h3>Itinerario</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Actividad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="date" required></td>
+              <td><input type="time" required></td>
+              <td><input type="text" placeholder="Descripción" required></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn small"><i class="fas fa-plus"></i> Agregar actividad</button>
+      </section>
+
+      <!-- Service Costs -->
+      <section class="service-costs">
+        <h3>Costos del servicio</h3>
+        <table>
+          <tr>
+            <td>Alojamiento</td>
+            <td><input type="text" placeholder="Costo" required></td>
+          </tr>
+          <tr>
+            <td>Traslado</td>
+            <td><input type="text" placeholder="Costo" required></td>
+          </tr>
+          <tr>
+            <td>Tours</td>
+            <td>
+              <select required>
+                <option>Seleccionar tours</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Costos adicionales</td>
+            <td><textarea placeholder="Descripción" required></textarea></td>
+          </tr>
+          <tr>
+            <td>Total servicios</td>
+            <td><input type="text" readonly></td>
+          </tr>
+        </table>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
