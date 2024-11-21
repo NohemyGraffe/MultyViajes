@@ -84,6 +84,7 @@ button.btn.small {
 /* Hover effect for small buttons */
 button.btn.small:hover {
     background-color: #777; /* Same hover effect as larger buttons */
+    transform: scale(1.05);
 }
 
 /* Header */
