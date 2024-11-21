@@ -11,11 +11,15 @@ body, html {
 /* Layout Container */
 .layout {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: flex-start; /* Align items to the top */
-    height: 100%; /* Full height */
+    justify-content: flex-start; /* Keep the default alignment for the content */
+    align-items: flex-start; /* Keep the content aligned to the top */
+    min-height: 100vh; /* Ensure full height */
+    width: 100%; /* Ensure full width */
     padding: 20px;
     position: relative; /* For positioning the top-right button */
+    margin: auto; /* Center the layout in the viewport */
+    margin-left: -40px; /* Adjust this value to move the layout more to the left */
+
 }
 
 /* Main Content */
@@ -29,7 +33,7 @@ body, html {
     justify-content: flex-start; /* Align sections from the top */
     min-height: 100vh; /* Allow scrolling */
     gap: 40px; /* Add space between sections */
-    margin-top: 110px; /* Add space to push content down */
+    margin-top: 3px; /* Add space to push content down */
 }
 
 /* Sections Styling */
@@ -64,6 +68,7 @@ table input, table select, table textarea {
     box-sizing: border-box;
 }
 
+
 /* Specific styling for small buttons under "Agregar hotel" and "Agregar actividad" */
 button.btn.small {
     padding: 8px 16px; /* Smaller padding for compact size */
@@ -81,6 +86,7 @@ button.btn.small {
 /* Hover effect for small buttons */
 button.btn.small:hover {
     background-color: #777; /* Same hover effect as larger buttons */
+    transform: scale(1.05);
 }
 
 /* Header */
@@ -159,33 +165,98 @@ header h1 {
 }
 
 
-/* New Styling for Cotización Input Box */
+/* Ensure that cotizacion-box stacks only the label and input */
 .cotizacion-box {
     display: flex;
-    flex-direction: column;
-    margin-top: 40px; /* Moves the box down below the buttons */
-    margin-left: 4px; /* Controls the horizontal position to the right */
+    flex-direction: column; /* Stack label and input vertically */
+    align-items: flex-start;
+    width: 100%; /* Ensure full width */
+    margin-top: 52px;
+    margin-left: 4px;
     position: relative;
 }
 
+/* Label styling */
 .cotizacion-label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px; /* Add space between label and input */
+}
+
+/* Wrapper for the input and button to align horizontally */
+.input-button-wrapper {
+    display: flex;
+    align-items: center; /* Vertically align the button and input */
+}
+
+/* Cotización Input Box */
+.cotizacion-input {
+    width: 100%; /* Make the input take full width */
+    padding: 10px;
+    margin-right: 10px; /* Adds space between input and button */
+    border-radius: 5px;
+    border: 1px solid #333;
+    box-sizing: border-box;
+}
+
+/* Search Button */
+.search-btn {
+    display: flex;  /* Use flexbox to align items horizontally */
+    align-items: center;  /* Vertically center the icon and text */
+    padding: 8px 12px;
+    background-color: #6c5ce7;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+
+/* Search Icon */
+.search-btn i {
+    margin-right: 6px;  /* Increase space between the icon and the text */
+}
+
+
+/* Hover effect for search button */
+.search-btn:hover {
+    background-color: #5a4bdb;
+    transform: scale(1.05);
+}
+
+
+/* Styling for Client Type Box */
+
+.client-type-box {
+    display: flex;
+    flex-direction: column;
+    margin-top: 44px; /* Space between the input boxes */
+    margin-left: 4px; /* Align with other boxes, adjust as needed */
+    position: relative; /* Allow future positioning adjustments */
+    width: 200px; /* Change this to adjust the width of the whole box */
+}
+
+.client-type-label {
     font-size: 14px;
     color: #333;
     margin-bottom: 5px;
 }
 
-.cotizacion-input {
+.client-type-dropdown {
     width: 200px;
     padding: 8px 12px;
     font-size: 16px;
-    border: 1px solid #8c8c8c;
+    border: 1px solid #333;
     border-radius: 5px;
     box-sizing: border-box;
+    background-color: #fff;
+    appearance: none; /* Remove default dropdown arrow for customization */
     transition: border-color 0.3s ease;
 }
 
-.cotizacion-input:focus {
+.client-type-dropdown:focus {
     outline: none;
-    border-color: #6c5ce7;
+    border-color: #6c5ce7; /* Highlight color */
 }
 
