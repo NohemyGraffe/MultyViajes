@@ -19,10 +19,24 @@
     <button class="btn gray">Inicio</button> 
     <button class="btn red">Guardar</button>
     <button class="btn blue">Descargar reserva</button>
-    <div class="cotizacion-box">
-        <label for="cotizacion-id" class="cotizacion-label">Obtener cotización</label>
-        <input type="text" id="cotizacion-id" placeholder="ID de cotización" class="cotizacion-input">
+
+    <!-- Cotizacion Box -->
+  <div class="cotizacion-box">
+    <label for="cotizacion-id" class="cotizacion-label">Obtener cotización</label>
+    <div class="input-button-wrapper">
+        <input type="text" id="cotizacion-id" class="cotizacion-input" placeholder="ID de cotización">
+        <button class="search-btn"><i class="fas fa-search"></i> Buscar</button>
     </div>
+  </div>
+    
+    
+    <!-- Client Type Box -->
+  <div class="client-type-box">
+    <label for="client-type" class="client-type-label">Tipo de cliente</label>
+    <select id="client-type" class="client-type-dropdown">
+      <option value="agencia">Agencia</option>
+      <option value="particular">Particular</option>
+    </select>
   </div>
 
   <!-- Main Content -->
