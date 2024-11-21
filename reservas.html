@@ -16,9 +16,10 @@
     
   <!-- Top Buttons -->
   <div class="top-buttons">
-    <button class="btn gray">Inicio</button> 
-    <button class="btn red">Guardar</button>
-    <button class="btn blue">Descargar reserva</button>
+    <button class="btn gray home-btn">Inicio</button> 
+    <button class="btn red save-btn">Guardar</button>
+    <button class="btn blue download-btn">Descargar reserva</button>
+    
 
     <!-- Cotizacion Box -->
   <div class="cotizacion-box">
@@ -45,6 +46,32 @@
     <div class="main-content">
       <h2>Crear reserva</h2>
 
+      <!-- Datos del Cliente Section -->
+    <!-- Datos del Cliente Section -->
+<section class="client-data">
+    <h3>Datos del cliente</h3>
+    <table class="client-table">
+      <thead>
+        <tr>
+          <th>Nombre del cliente</th>
+          <th>Pasaporte</th>
+          <th>Correo</th>
+          <th>Teléfono</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" placeholder="Ingrese nombre" required></td>
+          <td><input type="text" placeholder="Ingrese pasaporte" required></td>
+          <td><input type="email" placeholder="Ingrese correo" required></td>
+          <td><input type="tel" placeholder="Ingrese teléfono" required></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn small" data-action="add-client"><i class="fas fa-plus"></i> Agregar cliente</button>
+</section>
+    
+  
       <!-- Hotel Information -->
       <section class="hotel-info">
         <h3>Información del hotel</h3>
@@ -66,30 +93,33 @@
             </tr>
           </tbody>
         </table>
-        <button class="btn small"><i class="fas fa-plus"></i> Agregar hotel</button>
-      </section>
+        <button class="btn small" data-action="add-hotel"><i class="fas fa-plus"></i> Agregar hotel</button>
+    </section>
+    
 
       <!-- Itinerary -->
-      <section class="itinerary">
-        <h3>Itinerario</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Hora</th>
-              <th>Actividad</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="date" required></td>
-              <td><input type="time" required></td>
-              <td><input type="text" placeholder="Descripción" required></td>
-            </tr>
-          </tbody>
-        </table>
-        <button class="btn small"><i class="fas fa-plus"></i> Agregar actividad</button>
-      </section>
+     <!-- Itinerary -->
+<section class="itinerary">
+    <h3>Itinerario</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Actividad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="date" required></td>
+          <td><input type="time" required></td>
+          <td><input type="text" placeholder="Descripción" required></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn small" data-action="add-activity"><i class="fas fa-plus"></i> Agregar actividad</button>
+</section>
+    
 
       <!-- Service Costs -->
       <section class="service-costs">
@@ -123,5 +153,8 @@
       </section>
     </div>
   </div>
+  <script src="reservas.js"></script>
+
 </body>
 </html>
+
