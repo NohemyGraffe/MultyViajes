@@ -1,4 +1,5 @@
-/* General Reset */
+/* 1) General Reset */
+
 body, html {
     margin: 0;
     padding: 0;
@@ -8,133 +9,80 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
-/* Layout Container */
+/* 2) Layout & Container */
+
 .layout {
     display: flex;
-    justify-content: flex-start; /* Keep the default alignment for the content */
-    align-items: flex-start; /* Keep the content aligned to the top */
-    min-height: 100vh; /* Ensure full height */
-    width: 100%; /* Ensure full width */
+    justify-content: center; /* Center layout */
+    align-items: flex-start;
+    min-height: 100vh;
+    width: 100%;
     padding: 20px;
-    position: relative; /* For positioning the top-right button */
-    margin: auto; /* Center the layout in the viewport */
-    margin-left: -40px; /* Adjust this value to move the layout more to the left */
+    margin: auto;
+    margin-bottom: 120px; /* Add extra space below the layout */
 
 }
 
 /* Main Content */
 .main-content {
-    width: 100%; /* Make the main content wide */
-    max-width: 1200px; /* Limit maximum width */
+    width: 100%;
+    max-width: 1200px;
     padding: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align sections from the top */
-    min-height: 100vh; /* Allow scrolling */
-    gap: 40px; /* Add space between sections */
-    margin-top: 3px; /* Add space to push content down */
+    justify-content: flex-start;
+    min-height: 100vh;
+    gap: 40px;
 }
 
-/* Sections Styling */
-section {
-    background-color: #c6c5c5;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+/* 3) Header Styles*/
 
-section h3 {
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-}
-
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-table td {
-    padding: 10px;
-    border: 1px solid #8c8c8c;
-}
-
-table input, table select, table textarea {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    box-sizing: border-box;
-}
-
-
-/* Specific styling for small buttons under "Agregar hotel" and "Agregar actividad" */
-button.btn.small {
-    padding: 8px 16px; /* Smaller padding for compact size */
-    background-color: #5a5a5a; /* Same dark gray as other buttons */
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px; /* Slightly smaller border radius */
-    font-size: 16px; /* Smaller font size for small buttons */
-    display: inline-flex; /* Ensures the icon and text align nicely */
-    align-items: center;
-    gap: 8px; /* Space between icon and text */
-}
-
-/* Hover effect for small buttons */
-button.btn.small:hover {
-    background-color: #777; /* Same hover effect as larger buttons */
-    transform: scale(1.05);
-}
-
-/* Header */
+/*Header*/ 
 header {
-    display: flex; /* Aligns the children in a row */
-    justify-content: space-between; /* Places the title and user info at opposite ends */
-    align-items: center; /* Vertically aligns items */
-    background-color: #757575; /* Sets the header background color */
-    padding: 10px 20px; /* Adds padding inside the header */
-    height: 70px; /* Sets the header's height */
-    color: white; /* Sets the font color to white */
+    display: flex;
+    justify-content: flex-start; /* Align children to the left */
+    align-items: center;
+    background-color: #757575;
+    padding: 15px;
+    color: white;
+    gap: 20px; /* Add space between logo and title */
 }
 
-/* Logo Image */
+/* Logo */
 header .logo {
-    width: 250px; /* Adjust the logo size */
-    height: auto; /* Keeps the aspect ratio of the image */
+    width: 200px; /* Adjust size for better fit */
+    height: auto;
 }
 
-/* Title in Header */
+
+/* Title */
 header h1 {
-    font-size: 32px; /* Title size */
-    margin: 0; /* Remove any default margin */
-    flex-grow: 1; /* Allow the title to take up available space */
-    text-align: left; /* Ensure text is aligned to the left side */
-    margin-left: 48px; /* Adds space between the left edge and title */
+    font-size: 28px;
+    margin: 0;
+    text-align: left; /* Ensure text is aligned to the left */
+    white-space: nowrap; /* Prevent text from wrapping */
 }
+
+/* 4) Navigation/Buttons */
 
 /* Top left button Styles (Inicio, Guardar, Crear voucher) */
 
-/* Adjust the top-left buttons position */
 .top-buttons {
-    position: relative; 
-    top: 100px;
-    left: 180px;
-    z-index: 10; /* This ensures that the .top-buttons are always in front of other elements. */
+    position: relative;
+    top: 25px;
+    left: 10px;
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to stack */
+    gap: 10px;
 }
 
-/* Top Buttons with Hover Effects */
 .top-buttons .btn {
+    width: auto;
     padding: 14px 26px;
+    border-radius: 10px;
     color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
     font-size: 18px;
-    margin-right: 10px;
-    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .top-buttons .btn.gray {
@@ -165,14 +113,15 @@ header h1 {
 }
 
 
-/* Ensure that cotizacion-box stacks only the label and input */
+/* 5) Cotizacion ID input box & Tipo de cliente dropdown menu*/
+
 .cotizacion-box {
     display: flex;
     flex-direction: column; /* Stack label and input vertically */
     align-items: flex-start;
     width: 100%; /* Ensure full width */
     margin-top: 52px;
-    margin-left: 4px;
+    margin-left: 10px;
     position: relative;
 }
 
@@ -226,13 +175,13 @@ header h1 {
 }
 
 
-/* Styling for Client Type Box */
+/* 6)  Styling for Client Type Box */
 
 .client-type-box {
     display: flex;
     flex-direction: column;
     margin-top: 44px; /* Space between the input boxes */
-    margin-left: 4px; /* Align with other boxes, adjust as needed */
+    margin-left: 10px; /* Align with other boxes, adjust as needed */
     position: relative; /* Allow future positioning adjustments */
     width: 200px; /* Change this to adjust the width of the whole box */
 }
@@ -261,47 +210,116 @@ header h1 {
 }
 
 
+/* 7) Section Styling */
 
-/*" Datos del cliente" section */
-
-
-
-/* Styling for Client Data Section */
-.client-data {
+section {
     background-color: #c6c5c5;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    position: relative;
+    width: 100%;  /* Ensure section takes full width */
+    box-sizing: border-box; /* Ensure padding doesn’t affect width */
+ 
 }
 
-.client-data h3 {
+section h3 {
     margin-bottom: 20px;
     font-size: 1.5rem;
 }
 
-/* Table Styling */
-.client-table {
-    width: 100%;
+/* 8) Table Styling */
+
+table {
+    width: 100%; /* Ensure the table takes up the full width of its container */
     border-collapse: collapse;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px;*/
+    /*box-sizing: border-box; /* Prevents table from being smaller than expected */
 }
 
-.client-table th, 
-.client-table td {
-    padding: 10px;
+table input, table select, table textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box; /* Ensures the input doesn't exceed its cell's width */
+}
+
+th, td {
+    padding: 10px; /* Add spacing inside cells */
+    text-align: left; /* Align text to the left */
+   /*  border: 1px solid #ccc; /* Optional: Add borders for clarity */
+    font-size: 14px; /* Adjust font size for readability */
     border: 1px solid #8c8c8c;
 }
 
-.client-table input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    margin-top: 5px;
+/* Add alternate row coloring for better visibility */
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+tbody tr:nth-child(even) {
+    background-color: #ffffff;
 }
 
-/* Add Row Button Styling (Left Aligned) */
+
+/* Scrollable Table Container */
+.table-container {
+    max-height: 300px; /* Set a fixed height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: auto; /* Enable horizontal scrolling if content overflows */
+    border: 1px solid #ccc; /* Optional: Border around the container */
+    margin-top: 10px; /* Space above tables */
+}
+
+/* Sticky Headers */
+thead th {
+    position: sticky;
+    top: 0;
+    background-color: #ddd; /* Contrast header background for visibility */
+    z-index: 10; /* Prevent overlapping issues */
+    text-transform: uppercase; /* Optional: Capitalize header text */
+}
+
+
+/* Scrollbar Styles for Table Container */
+
+.table-container::-webkit-scrollbar {
+    width: 8px; /* Vertical scrollbar width */
+    height: 8px; /* Horizontal scrollbar height */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #aaa; /* Scrollbar color */
+    border-radius: 4px; /* Rounded scrollbar */
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background-color: #888; /* Darker on hover */
+}
+
+
+/* 9) Small buttons styling: "Agregar cliente", "Agregar hotel" and "Agregar actividad" */
+
+button.btn.small {
+    padding: 8px 16px; /* Smaller padding for compact size */
+    background-color: #5a5a5a; /* Same dark gray as other buttons */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; /* Slightly smaller border radius */
+    font-size: 16px; /* Smaller font size for small buttons */
+    display: inline-flex; /* Ensures the icon and text align nicely */
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+}
+
+/* Hover effect for small buttons */
+
+button.btn.small:hover {
+    background-color: #777; /* Same hover effect as larger buttons */
+    transform: scale(1.05);
+}
+
+/* 10) "Add Row" Buttons Styling (Left Aligned) */
+
 .add-row-btn {
     position: relative;
     float: left; /* Align to the bottom left */
@@ -323,3 +341,161 @@ header h1 {
     background-color: #777;
     transform: scale(1.05);
 }
+
+
+/* 11) Styling for the dropdown container */
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%; /* Make sure the container takes full width */
+}
+
+/* Button inside the dropdown */
+.dropbtn {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: black;
+    padding: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border-radius: 5px;
+    font-family: Arial, sans-serif; /* Ensure consistent font */
+}
+
+/* Dropdown menu */
+.dropdown-content {
+    position: absolute;
+    top: 100%; /* Position the dropdown directly below the input */
+    left: 0;
+    width: 100%; /* Ensure it takes up the full width of the button */
+    max-height: 250px; /* Limit the height of the dropdown */
+    overflow-y: auto; /* Enable scrolling if the dropdown is too long */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 9999; /* Ensure the dropdown appears above other content */
+    display: none; /* Initially hidden */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for better visibility */
+    font-family: Arial, sans-serif; /* Ensure consistent font */
+}
+
+/* Make the dropdown open when hovering over the button */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Styling for each checkbox option inside the dropdown */
+.dropdown-content label {
+    display: flex; /* Use flexbox for better alignment */
+    align-items: center; /* Vertically center the checkbox and label */
+    padding: 10px 15px; /* Add padding around each option for better spacing */
+    cursor: pointer;
+    transition: background-color 0.3s ease, padding-left 0.2s ease; /* Smooth transition */
+}
+
+/* Add hover effect for each label */
+.dropdown-content label:hover {
+    background-color: #97a1ce; /* Lighter background on hover */
+    padding-left: 20px; /* Add a subtle shift on hover */
+}
+
+/* Styling for the checkbox */
+.dropdown-content input[type="checkbox"] {
+    margin-right: 15px; /* More space between checkbox and label */
+    cursor: pointer; /* Ensure cursor changes to pointer */
+    width: 16px; /* Set a fixed width for checkboxes */
+    height: 16px; /* Set a fixed height for checkboxes */
+    border-radius: 3px; /* Make checkboxes rounded */
+    accent-color: #2938c6; /* Green accent color for checked state */
+}
+
+/* Section to allow overflow and prevent clipping */
+.section-container {
+    overflow: visible; /* Allow dropdown to extend outside the section */
+}
+
+
+/* Section to allow overflow and prevent clipping */
+.section-container {
+    overflow: visible; /* Allow dropdown to extend outside the section */
+}
+
+
+
+/* 12)Adding margin to the bottom of last section */
+
+
+.costos-servicio {
+    margin-bottom: 150px; /* Add space below the section */
+}
+
+/* 13) Responsive Styling for Smaller Screens. This section handle screens smaller than 768px */
+
+
+@media (max-width: 768px) {
+
+    /* Adjust layout for smaller screens */
+    .layout {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+        margin-left: 0; /* Remove negative margin */
+    }
+
+    .main-content {
+        padding: 10px;
+        gap: 20px; /* Reduce spacing between sections */
+    }
+
+    /* Header adjustments */
+    header {
+        flex-wrap: wrap; /* Allow header items to stack */
+        justify-content: center;
+        padding: 15px;
+        text-align: center;
+    }
+
+    header .logo {
+        width: 150px; /* Resize logo for smaller screens */
+    }
+
+    header h1 {
+        font-size: 24px; /* Adjust font size */
+        margin-left: 0; /* Center-align title */
+    }
+
+    /* Adjust top buttons */
+    .top-buttons {
+        left: 0;
+        top: 0;
+        flex-direction: column; /* Stack buttons vertically */
+        padding: 10px;
+    }
+
+    .top-buttons .btn {
+        margin: 5px 0;
+        width: 100%; /* Full-width buttons for smaller screens */
+    }
+
+    /* Table adjustments */
+
+    table {
+        font-size: 0.9rem;
+        overflow-x: auto;
+        display: block; /* Ensures proper scroll behavior */
+    }
+
+    table input, table select, table textarea {
+        font-size: 0.9rem; /* Adjust input sizes */
+    }
+
+    /* Section padding */
+    section {
+        padding: 20px;
+    }
+}
+
