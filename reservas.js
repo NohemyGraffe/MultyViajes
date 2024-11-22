@@ -1,6 +1,9 @@
 // reservas.js
 
-// Function to add a new client row
+// 1) Function to add a new client row
+
+
+
 function addClientRow() {
     const clientTableBody = document.querySelector('.client-table tbody'); // Select the tbody of the client table
     const newRow = document.createElement('tr'); // Create a new row
@@ -23,7 +26,10 @@ function addClientRow() {
     });
 }
 
-// Function to add a new hotel row
+// 2) Function to add a new hotel row
+
+
+
 function addHotelRow() {
     const hotelTableBody = document.querySelector('.hotel-info table tbody'); // Select the tbody of the hotel table
     const newRow = document.createElement('tr'); // Create a new row
@@ -46,7 +52,38 @@ function addHotelRow() {
     });
 }
 
-// Function to add a new activity row
+
+// 3) Function to add a new row to the vuelos table
+
+
+function addFlightRow() {
+    const vuelosTableBody = document.querySelector('.vuelos table tbody'); // Select the tbody of the vuelos table
+    const newRow = document.createElement('tr'); // Create a new row
+
+    // Add cells to the new row
+    newRow.innerHTML = `
+        <td><input type="date" required></td>
+        <td><input type="time" required></td>
+        <td><input type="text" placeholder="Número de vuelo" required></td>
+        <td><button class="remove-btn">X</button></td> <!-- Dynamically added remove button -->
+    `;
+
+    // Append the new row to the table body
+    vuelosTableBody.appendChild(newRow);
+
+    // Add event listener for the "Remove" button
+    newRow.querySelector('.remove-btn').addEventListener('click', function() {
+        vuelosTableBody.removeChild(newRow); // Remove the row
+    });
+}
+
+// Event listener for the "Agregar vuelo" button to trigger row addition
+document.querySelector('[data-action="add-flight"]').addEventListener('click', addFlightRow);
+
+
+// 4) Function to add a new activity row
+
+
 function addActivityRow() {
     const itineraryTableBody = document.querySelector('.itinerary table tbody'); // Select the tbody of the itinerary table
     const newRow = document.createElement('tr'); // Create a new row
