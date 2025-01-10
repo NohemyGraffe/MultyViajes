@@ -85,7 +85,6 @@ body {
 
 .sidebar ul li .fa-suitcase {
   font-size: 16px; /* Slightly larger palm tree icon */
-
 }
 
 .sidebar ul li .fa-map-marker-alt {
@@ -100,7 +99,6 @@ body {
   font-size: 16px; /* Truck icon for Proveedores */
 }
 
-
 .sidebar ul li .fa-calendar-alt {
   font-size: 16px; /* Slightly larger calendar icon */
 }
@@ -109,14 +107,12 @@ body {
   font-size: 16px; /* Slightly larger Instagram icon */
 }
 
-
 /* Ensuring the main content stretches to fit alongside sidebar */
 .main-content {
   flex: 1;
   padding: 0px;
   overflow-y: auto;
 }
-
 
 /* Header */
 header {
@@ -142,8 +138,6 @@ header {
   margin-left: 10px; /* Space between the text and the icon */
 }
 
-
-
 /* Action Buttons */
 .action-buttons {
   display: flex;
@@ -153,7 +147,6 @@ header {
   left: 180px; /* Adjust this to place buttons on the left side */
   top: 160px; /* Align buttons vertically with the dashboard */
 }
-
 
 .btn {
   padding: 18px 33px; /* Increase padding for height and width */
@@ -169,7 +162,6 @@ header {
   margin-right: 8px; /* Space between the icon and text */
   font-size: 20px;    /* Adjust icon size if necessary */
 }
-
 
 .btn.red {
   background-color: #e63946;
@@ -198,9 +190,7 @@ header {
   transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-/* Dashboard */
-
-/* Dashboard */
+/* Dashboard Container */
 .dashboard-container {
   display: flex;
   position: relative; /* Enables positioning of child elements (like buttons) */
@@ -210,6 +200,7 @@ header {
   margin-right: 100px; /* Adjust this if necessary */
 }
 
+/* Dashboard */
 .dashboard {
   background-color: #e0e0e0;
   padding: 20px;
@@ -275,3 +266,126 @@ header {
   font-size: 14px; /* Smaller font size for labels */
   margin-bottom: 10px;
 }
+
+/* ================================================
+   MEDIA QUERY FOR SMALLER SCREENS (max-width: 768px)
+   ================================================ */
+   @media (max-width: 768px) {
+    /* 1) Stack Sidebar and Main Content vertically */
+    body {
+      flex-direction: column; /* The sidebar goes on top, then main-content below */
+    }
+  
+    /* 2) Make the sidebar full width, auto height */
+    .sidebar {
+      width: 100%;
+      height: auto;
+    }
+  
+    .sidebar ul li {
+      margin-bottom: 10px;
+      text-align: left; /* or center, if you prefer */
+    }
+  
+    /* 3) Adjust the header for smaller screens */
+    header {
+      flex-wrap: wrap;
+      justify-content: center; /* center items if they wrap */
+      text-align: center;
+    }
+  
+    /* 4) .action-buttons no longer absolute */
+    .action-buttons {
+      position: static;  /* remove absolute positioning */
+      margin: 20px auto; /* center them horizontally if desired */
+      flex-direction: column;
+      gap: 20px; 
+      left: auto; /* reset left positioning */
+      top: auto;  /* reset top positioning */
+    }
+  
+    /* 5) dashboard-container in column mode */
+    .dashboard-container {
+      margin: 0 auto;
+      flex-direction: column; 
+      align-items: center;
+      padding: 10px;
+    }
+  
+    /* 6) The dashboard goes full width */
+    .dashboard {
+      width: 100%;
+      margin: 20px auto 0 auto;
+      max-width: 600px; /* optional smaller limit if you prefer */
+    }
+  
+    /* 7) Make cards narrower / stacked */
+    .dashboard-cards {
+      justify-content: center;
+    }
+    .card {
+      width: 150px; 
+      margin: 10px auto;
+    }
+  
+    /* 8) Possibly smaller buttons on mobile */
+    .btn {
+      font-size: 16px;
+      padding: 14px 20px;
+    }
+  }
+  
+  /* ================================================
+     MEDIA QUERY FOR MID-RANGE SCREENS (769px–1200px)
+     ================================================ */
+  @media (min-width: 769px) and (max-width: 1200px) {
+  
+    /* 
+       1) Keep the sidebar from being too large; or adjust if needed 
+         - If you want the sidebar narrower or auto width, do so here
+    */
+    .sidebar {
+      width: 250px; /* Example: slightly narrower if you want */
+    }
+  
+    /* 
+       2) Adjust .action-buttons if they overlap the dashboard 
+         - We remove absolute positioning so they don't clutter the screen
+    */
+    .action-buttons {
+      position: static; /* no absolute positioning here */
+      margin: 40px auto 20px auto; 
+      flex-direction: column;
+      gap: 20px; 
+      left: auto; 
+      top: auto;
+    }
+  
+    /*
+       3) Tweak .dashboard width so there is enough space 
+         - Instead of 45% or 100%, use something in between.
+    */
+    .dashboard {
+      width: 60%;  /* Enough space if you still want some “centered” effect */
+      margin: 80px auto 0 auto; /* Move it down slightly for spacing */
+      max-width: 900px; /* If you want a new max for mid-screens */
+    }
+  
+    /*
+       4) Adjust the .card widths or margins if needed 
+         - You can keep them as is, or slightly narrower. 
+    */
+    .card {
+      width: 160px; 
+      margin: 10px;
+    }
+  
+    /*
+       5) Tweak .btn sizing if they'd otherwise overlap 
+    */
+    .btn {
+      font-size: 17px;
+      padding: 16px 24px;
+    }
+  }
+  
