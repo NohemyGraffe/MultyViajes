@@ -10,138 +10,172 @@
 <body>
 
 <header>
-    <img src="logo.png" alt="Logo" class="logo"> <!-- Logo image on the left side -->
-    <h1>Sistema de gestión de datos</h1>
+  <img src="logo.png" alt="Logo" class="logo"> <!-- Logo image on the left side -->
+  <h1>Sistema de gestión de datos</h1>
 </header>
     
-  <!-- Top Buttons -->
-  <div class="top-buttons">
-    <button class="btn gray">Inicio</button> 
+<!-- Top Buttons -->
+<div class="top-buttons">
+    <!-- Modified "Inicio" button with onclick -->
+    <button class="btn gray" onclick="window.location.href='index.html'">
+      Inicio
+    </button> 
+  
+    <!-- Keep the other two as is -->
     <button class="btn red">Guardar</button>
     <button class="btn blue">Crear voucher</button>
   </div>
+  
 
-  <!-- Main Content -->
-  <div class="layout">
-    <!-- Main Content Section -->
-    <div class="main-content">
-      <h2>Crear cotización</h2>
+<!-- Main Content -->
+<div class="layout">
+  <div class="main-content">
+    <h2>Crear cotización</h2>
 
-      <!-- Hotel Information -->
-      <section class="hotel-info">
-        <h3>Información del hotel</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre del hotel</th>
-              <th>Tipo de habitación</th>
-              <th>No. de huéspedes</th>
-              <th>Fechas</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="text" placeholder="Ingrese el nombre" required></td>
-              <td><input type="text" placeholder="Ej. Doble, Suite" required></td>
-              <td><input type="number" required></td>
-              <td><input type="date" required> - <input type="date" required></td>
-            </tr>
-          </tbody>
-        </table>
-        <button class="btn small"><i class="fas fa-plus"></i> Agregar hotel</button>
-      </section>
-
-      <!-- Itinerary -->
-      <section class="itinerary">
-        <h3>Itinerario</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Hora</th>
-              <th>Actividad</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="date" required></td>
-              <td><input type="time" required></td>
-              <td><input type="text" placeholder="Descripción" required></td>
-            </tr>
-          </tbody>
-        </table>
-        <button class="btn small"><i class="fas fa-plus"></i> Agregar actividad</button>
-      </section>
-
-      <!-- Service Costs -->
-      <section class="service-costs">
-        <h3>Costos del servicio</h3>
-        <table>
+    <!-- Hotel Information -->
+    <section class="hotel-info">
+      <h3>Información del hotel</h3>
+      <table>
+        <thead>
           <tr>
-            <td>Alojamiento</td>
-            <td><input type="text" placeholder="Costo" required></td>
+            <th>Nombre del hotel</th>
+            <th>Tipo de habitación</th>
+            <th>No. de huéspedes</th>
+            <th>Fechas</th>
           </tr>
+        </thead>
+        <tbody>
           <tr>
-            <td>Traslado</td>
-            <td><input type="text" placeholder="Costo" required></td>
-          </tr>
-          <tr>
-            <td>Tours</td>
-            <td>
-              <select required>
-                <option>Seleccionar tours</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>Costos adicionales</td>
-            <td><textarea placeholder="Descripción" required></textarea></td>
-          </tr>
-          <tr>
-            <td>Total servicios</td>
-            <td><input type="text" readonly></td>
-          </tr>
-        </table>
-      </section>
-
-      <!-- Quotation Calculation -->
-      <section class="quotation-calculation">
-        <h3>Cálculo de cotización</h3>
-        <table>
-          <tr>
-            <td>Número de personas</td>
+            <td><input type="text" placeholder="Ingrese el nombre" required></td>
+            <td><input type="text" placeholder="Ej. Doble, Suite" required></td>
             <td><input type="number" required></td>
+            <td><input type="date" required> - <input type="date" required></td>
           </tr>
-          <tr>
-            <td>Precio por persona</td>
-            <td><input type="text" required></td>
-          </tr>
-          <tr>
-            <td>Monto total de la cotización</td>
-            <td><input type="text" readonly></td>
-          </tr>
-        </table>
-      </section>
+        </tbody>
+      </table>
+      <!-- Data-action attribute ensures JavaScript can hook into this button -->
+      <button class="btn small" data-action="add-hotel">
+        <i class="fas fa-plus"></i> Agregar hotel
+      </button>
+    </section>
 
-      <!-- Payments and Profits -->
-      <section class="payments-profits">
-        <h3>Pagos y ganancias</h3>
-        <table>
+    <!-- Itinerary -->
+    <section class="itinerary">
+      <h3>Itinerario</h3>
+      <table>
+        <thead>
           <tr>
-            <td>Monto pagado por el cliente</td>
-            <td><input type="text" required></td>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Actividad</th>
           </tr>
+        </thead>
+        <tbody>
           <tr>
-            <td>Costo para la empresa</td>
-            <td><input type="text" required></td>
+            <td><input type="date" required></td>
+            <td><input type="time" required></td>
+            <td><input type="text" placeholder="Descripción" required></td>
           </tr>
-          <tr>
-            <td>Ganancias / Utilidades</td>
-            <td><input type="text" readonly></td>
-          </tr>
-        </table>
-      </section>
-    </div>
+        </tbody>
+      </table>
+      <!-- Data-action attribute ensures JavaScript can hook into this button -->
+      <button class="btn small" data-action="add-activity">
+        <i class="fas fa-plus"></i> Agregar actividad
+      </button>
+    </section>
+
+    <!-- Service Costs (Costos del servicio) -->
+    <section class="service-costs costos-servicio-section">
+      <div class="costos-header">
+        <h3>Costos del servicio</h3>
+        <div class="currency-container">
+          <label for="currency-select" class="currency-label">Tipo de moneda:</label>
+          <select id="currency-select">
+            <option value="USD" data-symbol="$">USD</option>
+            <option value="EUR" data-symbol="€">EUR</option>
+            <option value="COP" data-symbol="$">COP</option>
+          </select>
+        </div>
+      </div>
+      
+      <table>
+        <tr>
+          <td>Alojamiento</td>
+          <td><input type="text" placeholder="Costo Alojamiento" required id="costo-alojamiento"></td>
+        </tr>
+        <tr>
+          <td>Traslado</td>
+          <td><input type="text" placeholder="Costo Traslado" required id="costo-traslado"></td>
+        </tr>
+        <tr>
+          <td>Tours</td>
+          <td>
+            <select required>
+              <option>Seleccionar tours</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Costos adicionales</td>
+          <td>
+            <input type="text" placeholder="Total" required id="costo-adicional-total" style="width: 50%">
+            <input type="text" placeholder="Descripción" required style="width: 50%">
+          </td>
+        </tr>
+        <tr>
+          <td>Total servicios</td>
+          <td>
+            <div style="display: flex; align-items: center;">
+              <input type="text" id="total-servicios" placeholder="Total Servicios" readonly>
+              <span id="currency-symbol" style="margin-left: 5px;">$</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Quotation Calculation (Optional example) -->
+    <section class="quotation-calculation">
+      <h3>Cálculo de cotización</h3>
+      <table>
+        <tr>
+          <td>Número de personas</td>
+          <td><input type="number" required></td>
+        </tr>
+        <tr>
+          <td>Precio por persona</td>
+          <td><input type="text" required></td>
+        </tr>
+        <tr>
+          <td>Monto total de la cotización</td>
+          <td><input type="text" readonly></td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Payments and Profits -->
+    <section class="payments-profits">
+      <h3>Pagos y ganancias</h3>
+      <table>
+        <tr>
+          <td>Monto pagado por el cliente</td>
+          <td><input type="text" required></td>
+        </tr>
+        <tr>
+          <td>Costo para la empresa</td>
+          <td><input type="text" required></td>
+        </tr>
+        <tr>
+          <td>Ganancias / Utilidades</td>
+          <td><input type="text" readonly></td>
+        </tr>
+      </table>
+    </section>
   </div>
+</div>
+
+<!-- JavaScript at the end -->
+<script src="cotizacion.js"></script>
 </body>
 </html>
+
