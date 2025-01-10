@@ -35,18 +35,23 @@
     </div>
   </div>
     
+<!-- Parent container wrapping both the box and fields -->
+<div class="client-type-container">
 
-    
     <!-- Client Type Box -->
-  <div class="client-type-box">
-    <label for="client-type" class="client-type-label">Tipo de cliente</label>
-    <select id="client-type" class="client-type-dropdown">
-      <option value="agencia">Agencia</option>
-      <option value="particular">Particular</option>
-    </select>
-  </div>
-
-
+    <div class="client-type-box">
+      <label for="client-type" class="client-type-label">Tipo de cliente</label>
+      <select id="client-type" class="client-type-dropdown">
+        <option value="" disabled selected>Seleccionar tipo de cliente</option>
+        <option value="agencia">Agencia</option>
+        <option value="particular">Particular</option>
+      </select>      
+    </div>
+  
+    <!-- Container for the dynamic input fields -->
+    <div class="client-type-fields"></div>
+  
+</div>
 
   <!-- Main Content -->
   <div class="layout">
@@ -171,44 +176,56 @@
 
 <!-- Costos del servicio Section -->
 
-<!-- Section containing the dropdown -->
-<section class="section-container">
-    <h3>Costos del servicio</h3>
+<section class="section-container costos-servicio-section">
+    <div class="costos-header">
+      <h3>Costos del servicio</h3>
+      <div class="currency-container">
+        <label for="currency-select" class="currency-label">Tipo de moneda:</label>
+        <select id="currency-select">
+          <option value="USD" data-symbol="USD">USD</option>
+          <option value="EUR" data-symbol="EUR">EUR</option>
+          <option value="COP" data-symbol="COP">COP</option>
+        </select>
+      </div>
+    </div>
+  
     <table>
-        <tr>
-            <th>Alojamiento</th>
-            <th>Traslado</th>
-            <th style=>Tours</th>
-            <th>Costos adicionales</th>
-            <th>Total servicios</th>
-        </tr>
-        <tr>
-            <td><input type="text" placeholder="Costo Alojamiento" required></td>
-            <td><input type="text" placeholder="Costo Traslado" required></td>
-            <td>
-                <div class="dropdown">
-                    <button class="dropbtn">Seleccionar Tours</button>
-                    <div class="dropdown-content">
-                        <label><input type="checkbox" value="tour1"> Guatape y Medellín</label>
-                        <label><input type="checkbox" value="tour2"> San Andrés y Cartagena</label>
-                        <label><input type="checkbox" value="tour3"> Bogotá 3 días</label>
-                        <!-- More options as needed -->
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div>
-                    <input type="text" placeholder="Total" required style="width: 50%; display: inline-block;">
-                    <input type="text" placeholder="Descripcion" required style="width: 50%; display: inline-block;">
-                </div>
-            </td>
-            <td><input type="number" placeholder="Total Servicios" required></td>
-        </tr>
+      <tr>
+        <th>Alojamiento</th>
+        <th>Traslado</th>
+        <th>Tours</th>
+        <th>Costos adicionales</th>
+        <th>Total servicios</th>
+      </tr>
+      <tr>
+        <td><input type="text" id="costo-alojamiento" placeholder="Costo Alojamiento" required></td>
+        <td><input type="text" id="costo-traslado" placeholder="Costo Traslado" required></td>
+        <td>
+          <div class="dropdown">
+            <button class="dropbtn">Seleccionar Tours</button>
+            <div class="dropdown-content">
+              <label><input type="checkbox" value="tour1"> Guatape y Medellín</label>
+              <label><input type="checkbox" value="tour2"> San Andrés y Cartagena</label>
+              <label><input type="checkbox" value="tour3"> Bogotá 3 días</label>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div>
+            <input type="text" id="costo-adicional-total" placeholder="Total" required style="width: 50%; display: inline-block;">
+            <input type="text" placeholder="Descripcion" required style="width: 50%; display: inline-block;">
+          </div>
+        </td>
+        <td>
+          <div style="display: flex; align-items: center;">
+            <input type="text" id="total-servicios" placeholder="Total Servicios" readonly>
+            <span id="currency-symbol" style="margin-left: 5px;">$</span>
+          </div>
+        </td>
+      </tr>
     </table>
-</section>
-
-
-
+  </section>
+  
     
     </div>
   </div>
@@ -218,5 +235,4 @@
 
 </body>
 </html>
-
 
