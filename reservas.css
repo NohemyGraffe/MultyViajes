@@ -175,40 +175,112 @@ header h1 {
 }
 
 
-/* 6)  Styling for Client Type Box */
-
-.client-type-box {
+/* Styling the Tipo de cliente section */
+/* ==============================
+   5) Tipo de cliente (Base/Desktop)
+   ============================== */
+   .client-type-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+    width: 100%; /* Ensure container can be as wide as needed */
+  }
+  
+  .client-type-box {
     display: flex;
     flex-direction: column;
-    margin-top: 44px; /* Space between the input boxes */
-    margin-left: 10px; /* Align with other boxes, adjust as needed */
-    position: relative; /* Allow future positioning adjustments */
-    width: 200px; /* Change this to adjust the width of the whole box */
-}
-
-.client-type-label {
+    align-items: flex-start;
+    margin-left: 10px;
+    position: relative;
+    width: auto;
+    margin-top: 0;
+  }
+  
+  .client-type-label {
     font-size: 14px;
     color: #333;
     margin-bottom: 5px;
-}
-
-.client-type-dropdown {
+  }
+  
+  .client-type-dropdown {
     width: 200px;
+    height: 40px;
+    font-size: 13px;
+    color: #333; 
     padding: 8px 12px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+  }
+  
+  .client-type-dropdown:focus {
+    outline: none;
+    border-color: #6c5ce7; 
+  }
+  
+  .client-type-fields {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .client-type-fields label {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+    display: inline-block;
+  }
+  
+  .client-type-fields input {
+    width: 100%;         /* Fill parent container */
+    max-width: 300px;    /* but do not exceed 300px on bigger screens */
+    height: 40px;
     font-size: 16px;
+    padding: 10px;
     border: 1px solid #333;
     border-radius: 5px;
     box-sizing: border-box;
-    background-color: #fff;
-    appearance: none; /* Remove default dropdown arrow for customization */
-    transition: border-color 0.3s ease;
-}
-
-.client-type-dropdown:focus {
-    outline: none;
-    border-color: #6c5ce7; /* Highlight color */
-}
-
+  }
+  
+  /* ==============================
+     Media Query for < 768px
+     ============================== */
+  @media (max-width: 768px) {
+    .client-type-container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+      width: 100%;
+    }
+  
+    .client-type-box {
+      margin-left: 0;
+      width: 100%;
+    }
+  
+    .client-type-dropdown {
+      width: 100%;
+      font-size: 14px;
+    }
+  
+    .client-type-fields {
+      margin-top: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      gap: 10px;
+    }
+  
+    .client-type-fields input {
+      width: 100%;      /* Full width on mobile */
+      max-width: none;  /* Remove the 300px limit */
+      font-size: 14px;
+    }
+  }
+  
 
 /* 7) Section Styling */
 
@@ -499,3 +571,36 @@ button.btn.small:hover {
     }
 }
 
+/*Styling the Currency dropdown in the Cost of services section*/
+
+.costos-servicio-section {
+    position: relative;
+  }
+  
+  .costos-header {
+    display: flex;
+    justify-content: space-between; /* Title on the left, dropdown on the right */
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  #currency-select {
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    box-sizing: border-box;
+  }
+  
+  .currency-container {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between label and select */
+  }
+  
+  .currency-label {
+    font-size: 14px;
+    color: #333;
+  }
+
+  
