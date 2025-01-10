@@ -29,7 +29,6 @@ function addClientRow() {
 // 2) Function to add a new hotel row
 
 
-
 function addHotelRow() {
     const hotelTableBody = document.querySelector('.hotel-info table tbody'); // Select the tbody of the hotel table
     const newRow = document.createElement('tr'); // Create a new row
@@ -109,3 +108,122 @@ function addActivityRow() {
 document.querySelector('[data-action="add-client"]').addEventListener('click', addClientRow);
 document.querySelector('[data-action="add-hotel"]').addEventListener('click', addHotelRow);
 document.querySelector('[data-action="add-activity"]').addEventListener('click', addActivityRow);
+
+
+/* 5) Functionality for the "Tipo de cliente" droppdown*/
+
+document.addEventListener('DOMContentLoaded', () => {
+    const clientTypeDropdown = document.querySelector('#client-type');
+    const clientTypeFields = document.querySelector('.client-type-fields');
+
+    // Define a function to update fields based on the selected value
+    function updateClientTypeFields(selectedValue) {
+        // Always clear existing fields first
+        clientTypeFields.innerHTML = '';
+
+        // If the selected value is empty (e.g., "Seleccionar tipo de cliente"), do nothing
+        if (!selectedValue) {
+            return;
+        }
+
+        if (selectedValue === 'agencia') {
+            // Create one input for "Nombre de agencia"
+            const agenciaLabel = document.createElement('label');
+            agenciaLabel.textContent = 'Nombre de la agencia';
+            const agenciaInput = document.createElement('input');
+            agenciaInput.type = 'text';
+            agenciaInput.placeholder = 'Ingrese el nombre de la agencia';
+            agenciaInput.required = true;
+
+            clientTypeFields.appendChild(agenciaLabel);
+            clientTypeFields.appendChild(agenciaInput);
+
+        } else if (selectedValue === 'particular') {
+            // Create two inputs: "Nombre de la persona que realiza la reserva" and "Contacto"
+            const personaLabel = document.createElement('label');
+            personaLabel.textContent = 'Nombre de la persona que realiza la reserva ';
+            const personaInput = document.createElement('input');
+            personaInput.type = 'text';
+            personaInput.placeholder = 'Ingrese el nombre de la persona';
+            personaInput.required = true;
+
+            const contactoLabel = document.createElement('label');
+            contactoLabel.textContent = 'Contacto ';
+            const contactoInput = document.createElement('input');
+            contactoInput.type = 'text';
+            contactoInput.placeholder = 'Ingrese el contacto';
+            contactoInput.required = true;
+
+            clientTypeFields.appendChild(personaLabel);
+            clientTypeFields.appendChild(personaInput);
+            clientTypeFields.appendChild(contactoLabel);
+            clientTypeFields.appendChild(contactoInput);
+        }
+    }
+
+    // Attach an event listener for dropdown changes
+    clientTypeDropdown.addEventListener('change', () => {
+        updateClientTypeFields(clientTypeDropdown.value);
+    });
+
+    // Also call it once on page load, in case there's a pre-selected value
+    // If your placeholder is selected by default (value=""), this will simply do nothing
+    updateClientTypeFields(clientTypeDropdown.value);
+});
+
+/* 6)Function to sum all the Service costs*/
+
+document.addEventListener('DOMContentLoaded', () => {
+  const alojamientoInput = document.getElementById('costo-alojamiento');
+  const trasladoInput = document.getElementById('costo-traslado');
+  const adicionalTotalInput = document.getElementById('costo-adicional-total');
+  const totalServiciosInput = document.getElementById('total-servicios');
+
+  function calculateTotal() {
+    // Parse input values as numbers. Use 0 if not a valid number.
+    const alojamiento = parseFloat(alojamientoInput.value) || 0;
+    const traslado = parseFloat(trasladoInput.value) || 0;
+    const adicionalTotal = parseFloat(adicionalTotalInput.value) || 0;
+
+    const sum = alojamiento + traslado + adicionalTotal;
+    totalServiciosInput.value = sum.toFixed(2); // Display with two decimals if you want
+  }
+
+  // Listen to input events on each relevant field
+  alojamientoInput.addEventListener('input', calculateTotal);
+  trasladoInput.addEventListener('input', calculateTotal);
+  adicionalTotalInput.addEventListener('input', calculateTotal);
+});
+
+
+/* 7) Styling the Currency dropdown menu*/
+
+document.addEventListener('DOMContentLoaded', () => {
+    const alojamientoInput = document.getElementById('costo-alojamiento');
+    const trasladoInput = document.getElementById('costo-traslado');
+    const adicionalTotalInput = document.getElementById('costo-adicional-total');
+    const totalServiciosInput = document.getElementById('total-servicios');
+    const currencySelect = document.getElementById('currency-select');
+    const currencySymbolSpan = document.getElementById('currency-symbol');
+  
+    function calculateTotal() {
+      const alojamiento = parseFloat(alojamientoInput.value) || 0;
+      const traslado = parseFloat(trasladoInput.value) || 0;
+      const adicionalTotal = parseFloat(adicionalTotalInput.value) || 0;
+  
+      const sum = alojamiento + traslado + adicionalTotal;
+      totalServiciosInput.value = sum.toFixed(2);
+    }
+  
+    alojamientoInput.addEventListener('input', calculateTotal);
+    trasladoInput.addEventListener('input', calculateTotal);
+    adicionalTotalInput.addEventListener('input', calculateTotal);
+  
+    // Update currency symbol when currency changes
+    currencySelect.addEventListener('change', () => {
+      const selectedOption = currencySelect.options[currencySelect.selectedIndex];
+      const symbol = selectedOption.getAttribute('data-symbol');
+      currencySymbolSpan.textContent = symbol;
+    });
+  });
+  
