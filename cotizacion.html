@@ -10,24 +10,17 @@
 <body>
 
 <header>
-  <img src="logo.png" alt="Logo" class="logo"> <!-- Logo image on the left side -->
+  <img src="logo.png" alt="Logo" class="logo">
   <h1>Sistema de gestión de datos</h1>
 </header>
-    
+
 <!-- Top Buttons -->
 <div class="top-buttons">
-    <!-- Modified "Inicio" button with onclick -->
-    <button class="btn gray" onclick="window.location.href='index.html'">
-      Inicio
-    </button> 
-  
-    <!-- Keep the other two as is -->
-    <button class="btn red">Guardar</button>
-    <button class="btn blue">Crear voucher</button>
-  </div>
-  
+  <button class="btn gray" onclick="window.location.href='index.html'">Inicio</button>
+  <button class="btn red">Guardar</button>
+  <button class="btn blue">Crear voucher</button>
+</div>
 
-<!-- Main Content -->
 <div class="layout">
   <div class="main-content">
     <h2>Crear cotización</h2>
@@ -53,10 +46,7 @@
           </tr>
         </tbody>
       </table>
-      <!-- Data-action attribute ensures JavaScript can hook into this button -->
-      <button class="btn small" data-action="add-hotel">
-        <i class="fas fa-plus"></i> Agregar hotel
-      </button>
+      <button class="btn small" data-action="add-hotel"><i class="fas fa-plus"></i> Agregar hotel</button>
     </section>
 
     <!-- Itinerary -->
@@ -78,10 +68,7 @@
           </tr>
         </tbody>
       </table>
-      <!-- Data-action attribute ensures JavaScript can hook into this button -->
-      <button class="btn small" data-action="add-activity">
-        <i class="fas fa-plus"></i> Agregar actividad
-      </button>
+      <button class="btn small" data-action="add-activity"><i class="fas fa-plus"></i> Agregar actividad</button>
     </section>
 
     <!-- Service Costs (Costos del servicio) -->
@@ -91,9 +78,9 @@
         <div class="currency-container">
           <label for="currency-select" class="currency-label">Tipo de moneda:</label>
           <select id="currency-select">
-            <option value="USD" data-symbol="$">USD</option>
-            <option value="EUR" data-symbol="€">EUR</option>
-            <option value="COP" data-symbol="$">COP</option>
+            <option value="USD" data-symbol="USD">USD</option>
+            <option value="EUR" data-symbol="EUR">EUR</option>
+            <option value="COP" data-symbol="COP" selected>COP</option> <!-- Set COP as default -->
           </select>
         </div>
       </div>
@@ -110,9 +97,15 @@
         <tr>
           <td>Tours</td>
           <td>
-            <select required>
-              <option>Seleccionar tours</option>
-            </select>
+            <div class="multi-select" id="tour-dropdown">
+              <div class="select-box">Seleccionar tours <i class="fas fa-chevron-down"></i></div>
+              <div class="dropdown">
+                <label>City Tour <input type="checkbox" value="city-tour"></label>
+                <label>Guatapé <input type="checkbox" value="guatape"></label>
+                <label>Bogotá <input type="checkbox" value="bogota"></label>
+                <label>San Andrés <input type="checkbox" value="san-andres"></label>
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -132,23 +125,98 @@
           </td>
         </tr>
       </table>
+
+      <!-- CSS for Tours Dropdown -->
+      <style>
+        .multi-select {
+          position: relative;
+          width: 100%;
+        }
+
+        .multi-select .select-box {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #fff;
+          cursor: pointer;
+        }
+
+        .multi-select .dropdown {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          max-height: 150px;
+          overflow-y: auto;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #fff;
+          z-index: 10;
+          display: none;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .multi-select .dropdown label {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          cursor: pointer;
+          font-size: 14px;
+        }
+
+        .multi-select .dropdown label:hover {
+          background-color: #f0f0f0;
+        }
+
+        .multi-select .dropdown input[type="checkbox"] {
+          margin-left: 10px;
+        }
+      </style>
+
+      <!-- JS for Tours Dropdown -->
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const multiSelect = document.getElementById('tour-dropdown');
+          const selectBox = multiSelect.querySelector('.select-box');
+          const dropdown = multiSelect.querySelector('.dropdown');
+
+          selectBox.addEventListener('click', () => {
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+          });
+
+          document.addEventListener('click', (e) => {
+            if (!multiSelect.contains(e.target)) {
+              dropdown.style.display = 'none';
+            }
+          });
+        });
+      </script>
     </section>
 
-    <!-- Quotation Calculation (Optional example) -->
+   <!-- Quotation Calculation -->
     <section class="quotation-calculation">
       <h3>Cálculo de cotización</h3>
       <table>
         <tr>
           <td>Número de personas</td>
-          <td><input type="number" required></td>
+          <td><input type="number" id="numero-personas" placeholder="Ingrese la cantidad" required></td>
         </tr>
         <tr>
           <td>Precio por persona</td>
-          <td><input type="text" required></td>
+          <td><input type="text" id="precio-por-persona" placeholder="0.00" readonly></td>
         </tr>
         <tr>
           <td>Monto total de la cotización</td>
-          <td><input type="text" readonly></td>
+          <td>
+            <div style="display: flex; align-items: center;">
+              <input type="text" id="monto-cotizacion" placeholder="0.00" readonly>
+              <span id="currency-cotizacion-symbol" style="margin-left: 5px;">$</span>
+            </div>
+          </td>
         </tr>
       </table>
     </section>
@@ -159,18 +227,29 @@
       <table>
         <tr>
           <td>Monto pagado por el cliente</td>
-          <td><input type="text" required></td>
-        </tr>
-        <tr>
-          <td>Costo para la empresa</td>
-          <td><input type="text" required></td>
+          <td><input type="text" id="monto-cliente" required></td>
         </tr>
         <tr>
           <td>Ganancias / Utilidades</td>
-          <td><input type="text" readonly></td>
+          <td>
+            <div style="display: flex; align-items: center;">
+              <input type="text" id="ganancias" placeholder="0.00" readonly>
+              <span id="currency-ganancias-symbol" style="margin-left: 5px;">$</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Utilidad por persona</td>
+          <td>
+            <div style="display: flex; align-items: center;">
+              <input type="text" id="utilidad-persona" placeholder="0.00" readonly>
+              <span id="currency-utilidad-symbol" style="margin-left: 5px;">$</span>
+            </div>
+          </td>
         </tr>
       </table>
     </section>
+
   </div>
 </div>
 
@@ -178,4 +257,5 @@
 <script src="cotizacion.js"></script>
 </body>
 </html>
+
 
