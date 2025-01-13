@@ -206,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const currencySelect = document.getElementById('currency-select');
     const currencySymbolSpan = document.getElementById('currency-symbol');
   
+    // Function to calculate total services
     function calculateTotal() {
       const alojamiento = parseFloat(alojamientoInput.value) || 0;
       const traslado = parseFloat(trasladoInput.value) || 0;
@@ -215,15 +216,23 @@ document.addEventListener('DOMContentLoaded', () => {
       totalServiciosInput.value = sum.toFixed(2);
     }
   
+    // Function to update currency symbol
+    function updateCurrencySymbol() {
+      const selectedOption = currencySelect.options[currencySelect.selectedIndex];
+      const symbol = selectedOption.getAttribute('data-symbol') || 'COP'; // Default to COP
+      currencySymbolSpan.textContent = symbol;
+    }
+  
+    // Initialize on page load
+    updateCurrencySymbol();
+    calculateTotal();
+  
+    // Event listeners for input changes
     alojamientoInput.addEventListener('input', calculateTotal);
     trasladoInput.addEventListener('input', calculateTotal);
     adicionalTotalInput.addEventListener('input', calculateTotal);
   
-    // Update currency symbol when currency changes
-    currencySelect.addEventListener('change', () => {
-      const selectedOption = currencySelect.options[currencySelect.selectedIndex];
-      const symbol = selectedOption.getAttribute('data-symbol');
-      currencySymbolSpan.textContent = symbol;
-    });
+    // Event listener for currency change
+    currencySelect.addEventListener('change', updateCurrencySymbol);
   });
   
