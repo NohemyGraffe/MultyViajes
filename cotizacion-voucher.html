@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Voucher</title>
+  <link rel="stylesheet" href="voucher.css" />
+</head>
+<body>
+  <h1>Resumen de la Cotización</h1>
+  <div id="voucher-content"></div>
+
+  <script>
+    // 1) Parse query params
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const cotizacionId   = urlParams.get('id');
+    const hotel          = urlParams.get('hotel');
+    const acomodacion    = urlParams.get('acomodacion');
+    const itinerario     = urlParams.get('itinerario');
+    const numeroPersonas = urlParams.get('numeroPersonas');
+    const precioPersona  = urlParams.get('precioPersona');
+    const totalPagar     = urlParams.get('totalPagar');
+    
+    // NEW: Capture the currency symbol
+    const currencySymbol = urlParams.get('symbol') || 'COP ';
+
+    // 2) Display them
+    // Insert the symbol where relevant (e.g., next to precioPersona, totalPagar)
+    const voucherDiv = document.getElementById('voucher-content');
+    voucherDiv.innerHTML = `
+      <p><strong>* ID de cotización:</strong> ${cotizacionId}</p>
+      <p><strong>* Nombre del hotel:</strong> ${hotel}</p>
+      <p><strong>* Tipo de acomodación:</strong> ${acomodacion}</p>
+      <p><strong>* Itinerario:</strong><br>
+         <pre>${itinerario}</pre>
+      </p>
+      <p><strong>* Número de personas:</strong> ${numeroPersonas}</p>
+      <p><strong>* Precio por persona:</strong> ${currencySymbol}${precioPersona}</p>
+      <p><strong>* Total a pagar:</strong> ${currencySymbol}${totalPagar}</p>
+    `;
+  </script>
+</body>
+</html>
+
