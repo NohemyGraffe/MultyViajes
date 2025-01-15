@@ -69,7 +69,7 @@ function addHotelRow() {
   });
   
   /********************************************
-    3) Summation of Service Costs
+    3) Summation of Service Costs (Base Fields Only)
   ********************************************/
   document.addEventListener('DOMContentLoaded', () => {
     const alojamientoInput    = document.getElementById('costo-alojamiento');
@@ -81,75 +81,81 @@ function addHotelRow() {
       return; // If these fields don’t exist, do nothing
     }
   
-    function calculateTotal() {
+    // We’ll rely on the advanced logic in #5 to finalize calculations,
+    // but keep a simple function if needed.
+    function calculateBaseTotal() {
       const alojamientoVal = parseFloat(alojamientoInput.value) || 0;
-      const trasladoVal = parseFloat(trasladoInput.value) || 0;
-      const adicionalVal = parseFloat(adicionalTotalInput.value) || 0;
-      const sum = alojamientoVal + trasladoVal + adicionalVal;
-  
-      totalServiciosInput.value = sum.toFixed(2);
+      const trasladoVal    = parseFloat(trasladoInput.value) || 0;
+      const adicionalVal   = parseFloat(adicionalTotalInput.value) || 0;
+      return alojamientoVal + trasladoVal + adicionalVal;
     }
   
-    // Listen for inputs
-    alojamientoInput.addEventListener('input', calculateTotal);
-    trasladoInput.addEventListener('input', calculateTotal);
-    adicionalTotalInput.addEventListener('input', calculateTotal);
+    // Attach event listeners to recalc if needed
+    alojamientoInput.addEventListener('input', () => {});
+    trasladoInput.addEventListener('input', () => {});
+    adicionalTotalInput.addEventListener('input', () => {});
   });
   
   /********************************************
     4) Currency Dropdown in "Costos del servicio"
   ********************************************/
-    document.addEventListener('DOMContentLoaded', () => {
-        const currencySelect           = document.getElementById('currency-select');
-        const currencySymbolSpan       = document.getElementById('currency-symbol');
-        const currencyCotizacionSymbol = document.getElementById('currency-cotizacion-symbol');
-        const currencyGananciasSymbol  = document.getElementById('currency-ganancias-symbol');
-        const currencyUtilidadSymbol   = document.getElementById('currency-utilidad-symbol');
-      
-        // Function to update all currency symbols
-        function updateCurrencySymbols() {
-          const selectedOption = currencySelect.options[currencySelect.selectedIndex];
-          const symbol = selectedOption.getAttribute('data-symbol') || 'COP';
-      
-          currencySymbolSpan.textContent = symbol;
-          if (currencyCotizacionSymbol) {
-            currencyCotizacionSymbol.textContent = symbol;
-          }
-          if (currencyGananciasSymbol) {
-            currencyGananciasSymbol.textContent = symbol;
-          }
-          if (currencyUtilidadSymbol) {
-            currencyUtilidadSymbol.textContent = symbol;
-          }
-        }
-      
-        // Set default symbols to COP on page load
-        updateCurrencySymbols();
-      
-        // Update symbols when currency changes
-        currencySelect.addEventListener('change', updateCurrencySymbols);
-      });
-      
+  document.addEventListener('DOMContentLoaded', () => {
+    const currencySelect           = document.getElementById('currency-select');
+    const currencySymbolSpan       = document.getElementById('currency-symbol');
+    const currencyCotizacionSymbol = document.getElementById('currency-cotizacion-symbol');
+    const currencyGananciasSymbol  = document.getElementById('currency-ganancias-symbol');
+    const currencyUtilidadSymbol   = document.getElementById('currency-utilidad-symbol');
+  
+    // Function to update all currency symbols
+    function updateCurrencySymbols() {
+      const selectedOption = currencySelect.options[currencySelect.selectedIndex];
+      const symbol = selectedOption.getAttribute('data-symbol') || 'COP';
+  
+      currencySymbolSpan.textContent = symbol;
+      if (currencyCotizacionSymbol) {
+        currencyCotizacionSymbol.textContent = symbol;
+      }
+      if (currencyGananciasSymbol) {
+        currencyGananciasSymbol.textContent = symbol;
+      }
+      if (currencyUtilidadSymbol) {
+        currencyUtilidadSymbol.textContent = symbol;
+      }
+    }
+  
+    // Set default symbols to COP on page load
+    updateCurrencySymbols();
+  
+    // Update symbols when currency changes
+    currencySelect.addEventListener('change', updateCurrencySymbols);
+  });
+  
   
   /********************************************
-   *  5) Quotation Calculation 
+   * 5) Quotation Calculation (Advanced + Tours)
   ********************************************/
   document.addEventListener('DOMContentLoaded', () => {
     // Fields from "Costos del servicio"
-    const alojamientoInput     = document.getElementById('costo-alojamiento');
-    const trasladoInput        = document.getElementById('costo-traslado');
-    const adicionalTotalInput  = document.getElementById('costo-adicional-total');
-    const totalServiciosInput  = document.getElementById('total-servicios');
+    const alojamientoInput    = document.getElementById('costo-alojamiento');
+    const trasladoInput       = document.getElementById('costo-traslado');
+    const adicionalTotalInput = document.getElementById('costo-adicional-total');
+    const totalServiciosInput = document.getElementById('total-servicios');
+  
+    // Tour checkboxes
+    const tourDropdown   = document.getElementById('tour-dropdown');
+    const tourCheckboxes = tourDropdown
+      ? tourDropdown.querySelectorAll('input[type="checkbox"]')
+      : [];
   
     // Fields from "Cálculo de cotización"
     const numeroPersonasInput   = document.getElementById('numero-personas');
     const precioPorPersonaInput = document.getElementById('precio-por-persona');
     const montoCotizacionInput  = document.getElementById('monto-cotizacion');
   
-    // NEW: Fields from "Pagos y ganancias"
-    const montoClienteInput      = document.getElementById('monto-cliente');
-    const gananciasInput         = document.getElementById('ganancias');
-    const utilidadPersonaInput   = document.getElementById('utilidad-persona');
+    // Fields from "Pagos y ganancias"
+    const montoClienteInput    = document.getElementById('monto-cliente');
+    const gananciasInput       = document.getElementById('ganancias');
+    const utilidadPersonaInput = document.getElementById('utilidad-persona');
   
     // If any are missing, skip
     if (!(
@@ -167,19 +173,37 @@ function addHotelRow() {
       return;
     }
   
-    // Calculate total cost of service (alojamiento + traslado + adicional)
-    function calculateServiceTotal() {
+    // Sum of base fields: alojamiento + traslado + adicional
+    function sumBaseCosts() {
       const alojamientoVal = parseFloat(alojamientoInput.value) || 0;
       const trasladoVal    = parseFloat(trasladoInput.value) || 0;
       const adicionalVal   = parseFloat(adicionalTotalInput.value) || 0;
-      const sum = alojamientoVal + trasladoVal + adicionalVal;
+      return alojamientoVal + trasladoVal + adicionalVal;
+    }
+  
+    // **New**: Sum of selected tours
+    function sumSelectedTours() {
+      let toursTotal = 0;
+      tourCheckboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+          const price = parseFloat(checkbox.getAttribute('data-price')) || 0;
+          toursTotal += price;
+        }
+      });
+      return toursTotal;
+    }
+  
+    // Calculate total "Costos del servicio"
+    function calculateServiceTotal() {
+      const baseCosts = sumBaseCosts();
+      const toursVal  = sumSelectedTours();
+      const sum = baseCosts + toursVal;
   
       totalServiciosInput.value = sum.toFixed(2);
       return sum;
     }
   
-    // Recalculate quotation: 
-    // "Precio por persona" + "Monto cotizacion" from service total
+    // Recalculate the quotation fields
     function recalcQuotation() {
       const totalServicios = calculateServiceTotal();
   
@@ -191,14 +215,14 @@ function addHotelRow() {
       }
       precioPorPersonaInput.value = precioPorPersona.toFixed(2);
   
-      // Monto cotizacion = totalServicios
+      // "Monto total de la cotización" = totalServicios
       montoCotizacionInput.value = totalServicios.toFixed(2);
   
       // After updating Monto cotizacion, recalc Gains
       recalcGains();
     }
   
-    // NEW: Recalculate Gains + Utilidad/persona
+    // Recalculate Gains + Utilidad/persona
     function recalcGains() {
       const montoClienteVal    = parseFloat(montoClienteInput.value) || 0;
       const montoCotizacionVal = parseFloat(montoCotizacionInput.value) || 0;
@@ -217,19 +241,24 @@ function addHotelRow() {
     }
   
     // Attach event listeners
-    // 1) Service cost fields => recalc Quotation
+  
+    // (A) Service cost fields => recalc Quotation
     alojamientoInput.addEventListener('input', recalcQuotation);
     trasladoInput.addEventListener('input', recalcQuotation);
     adicionalTotalInput.addEventListener('input', recalcQuotation);
   
-    // 2) "Número de personas" => recalc Quotation
+    // (B) Tour checkboxes => recalc Quotation
+    tourCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', recalcQuotation);
+    });
+  
+    // (C) "Número de personas" => recalc Quotation
     numeroPersonasInput.addEventListener('input', recalcQuotation);
   
-    // 3) "Monto pagado por el cliente" => recalc Gains directly
+    // (D) "Monto pagado por el cliente" => recalc Gains directly
     montoClienteInput.addEventListener('input', recalcGains);
   
-    // Init on page load
+    // Initialize on page load
     recalcQuotation();
   });
-  
   
