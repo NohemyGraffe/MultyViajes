@@ -18,7 +18,8 @@
 <div class="top-buttons">
   <button class="btn gray" onclick="window.location.href='index.html'">Inicio</button>
   <button class="btn red">Guardar</button>
-  <button class="btn blue">Crear voucher</button>
+  <!-- Modified "Crear voucher" button to call openVoucherPage() -->
+  <button class="btn blue" onclick="openVoucherPage()">Crear resumen de la cotización</button>
 </div>
 
 <div class="layout">
@@ -39,6 +40,7 @@
         </thead>
         <tbody>
           <tr>
+            <!-- Example placeholders for relevant data -->
             <td><input type="text" placeholder="Ingrese el nombre" required></td>
             <td><input type="text" placeholder="Ej. Doble, Suite" required></td>
             <td><input type="number" required></td>
@@ -46,7 +48,9 @@
           </tr>
         </tbody>
       </table>
-      <button class="btn small" data-action="add-hotel"><i class="fas fa-plus"></i> Agregar hotel</button>
+      <button class="btn small" data-action="add-hotel">
+        <i class="fas fa-plus"></i> Agregar hotel
+      </button>
     </section>
 
     <!-- Itinerary -->
@@ -68,7 +72,9 @@
           </tr>
         </tbody>
       </table>
-      <button class="btn small" data-action="add-activity"><i class="fas fa-plus"></i> Agregar actividad</button>
+      <button class="btn small" data-action="add-activity">
+        <i class="fas fa-plus"></i> Agregar actividad
+      </button>
     </section>
 
     <!-- Service Costs (Costos del servicio) -->
@@ -80,7 +86,7 @@
           <select id="currency-select">
             <option value="USD" data-symbol="USD">USD</option>
             <option value="EUR" data-symbol="EUR">EUR</option>
-            <option value="COP" data-symbol="COP" selected>COP</option> <!-- Set COP as default -->
+            <option value="COP" data-symbol="COP" selected>COP</option>
           </select>
         </div>
       </div>
@@ -94,20 +100,35 @@
           <td>Traslado</td>
           <td><input type="text" placeholder="Costo Traslado" required id="costo-traslado"></td>
         </tr>
-        <tr>
-          <td>Tours</td>
-          <td>
-            <div class="multi-select" id="tour-dropdown">
-              <div class="select-box">Seleccionar tours <i class="fas fa-chevron-down"></i></div>
-              <div class="dropdown">
-                <label>City Tour <input type="checkbox" value="city-tour"></label>
-                <label>Guatapé <input type="checkbox" value="guatape"></label>
-                <label>Bogotá <input type="checkbox" value="bogota"></label>
-                <label>San Andrés <input type="checkbox" value="san-andres"></label>
-              </div>
-            </div>
-          </td>
-        </tr>
+<!-- In the "Tours" row -->
+<tr>
+    <td>Tours</td>
+    <td>
+      <div class="multi-select" id="tour-dropdown">
+        <div class="select-box">Seleccionar tours <i class="fas fa-chevron-down"></i></div>
+        <div class="dropdown">
+          <!-- Each label has a data-price attribute on the checkbox -->
+          <label>
+            City Tour (20000Cop)
+            <input type="checkbox" value="city-tour" data-price="20000">
+          </label>
+          <label>
+            Guatapé (35000Cop)
+            <input type="checkbox" value="guatape" data-price="35000">
+          </label>
+          <label>
+            Bogotá (40000Cop)
+            <input type="checkbox" value="bogota" data-price="40000">
+          </label>
+          <label>
+            San Andrés (40000Cop)
+            <input type="checkbox" value="san-andres" data-price="40000">
+          </label>
+        </div>
+      </div>
+    </td>
+  </tr>
+  
         <tr>
           <td>Costos adicionales</td>
           <td>
@@ -197,7 +218,7 @@
       </script>
     </section>
 
-   <!-- Quotation Calculation -->
+    <!-- Quotation Calculation -->
     <section class="quotation-calculation">
       <h3>Cálculo de cotización</h3>
       <table>
@@ -253,9 +274,54 @@
   </div>
 </div>
 
-<!-- JavaScript at the end -->
+<!-- JavaScript: Gather data and open "cotizacion-voucher.html" -->
+<script>
+  function openVoucherPage() {
+    // 1) Gather relevant form data
+    const hotelName       = document.querySelector('input[placeholder="Ingrese el nombre"]').value;
+    const acomodacion     = document.querySelector('input[placeholder="Ej. Doble, Suite"]').value;
+    const itineraryRows   = document.querySelectorAll('.itinerary table tbody tr');
+    const numeroPersonas  = document.getElementById('numero-personas').value;
+    const precioPersona   = document.getElementById('precio-por-persona').value;
+    const totalCotizacion = document.getElementById('monto-cotizacion').value;
+    const montoCliente    = document.getElementById('monto-cliente').value;
+
+    // 2) Format the itinerario data
+    let itinerarioText = '';
+    itineraryRows.forEach(row => {
+      const dateInput = row.querySelector('input[type="date"]').value;
+      const timeInput = row.querySelector('input[type="time"]').value;
+      const activity  = row.querySelector('input[placeholder="Descripción"]').value;
+
+      if (dateInput || timeInput || activity) {
+        // Example format: "2023-04-12 / 09:00 / City Tour"
+        itinerarioText += `${dateInput} / ${timeInput} / ${activity}\n`;
+      }
+    });
+
+    // 3) Create a "Cotización ID" (simple approach)
+    let lastId = localStorage.getItem('lastCotizacionId') || 0;
+    lastId = parseInt(lastId, 10) + 1;
+    localStorage.setItem('lastCotizacionId', lastId);
+
+    // 4) Build query params
+    const params = new URLSearchParams({
+      id:              lastId,
+      hotel:           hotelName,
+      acomodacion:     acomodacion,
+      itinerario:      itinerarioText,
+      numeroPersonas:  numeroPersonas,
+      precioPersona:   precioPersona,
+      totalPagar:      totalCotizacion,
+      montoCliente:    montoCliente
+    });
+
+    // 5) Navigate to "cotizacion-voucher.html"
+    window.location.href = `cotizacion-voucher.html?${params.toString()}`;
+  }
+</script>
+
+<!-- Link your main JS file at the end (with cost calculations, currency, etc.) -->
 <script src="cotizacion.js"></script>
 </body>
 </html>
-
-
