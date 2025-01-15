@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crear Cotización</title>
   <link rel="stylesheet" href="cotizacion.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -18,7 +17,7 @@
 <div class="top-buttons">
   <button class="btn gray" onclick="window.location.href='index.html'">Inicio</button>
   <button class="btn red">Guardar</button>
-  <!-- Modified "Crear voucher" button to call openVoucherPage() -->
+  <!-- Button that triggers the voucher/resumen creation -->
   <button class="btn blue" onclick="openVoucherPage()">Crear resumen de la cotización</button>
 </div>
 
@@ -40,7 +39,6 @@
         </thead>
         <tbody>
           <tr>
-            <!-- Example placeholders for relevant data -->
             <td><input type="text" placeholder="Ingrese el nombre" required></td>
             <td><input type="text" placeholder="Ej. Doble, Suite" required></td>
             <td><input type="number" required></td>
@@ -80,7 +78,7 @@
     <!-- Service Costs (Costos del servicio) -->
     <section class="service-costs costos-servicio-section">
       <div class="costos-header">
-        <h3>Costos del servicio</h3>
+        <h3>Costos del servicio por persona</h3>
         <div class="currency-container">
           <label for="currency-select" class="currency-label">Tipo de moneda:</label>
           <select id="currency-select">
@@ -92,68 +90,223 @@
       </div>
       
       <table>
+        <!-- Alojamiento row: label "Precio interno" only -->
         <tr>
           <td>Alojamiento</td>
-          <td><input type="text" placeholder="Costo Alojamiento" required id="costo-alojamiento"></td>
+          <td>
+            <label>Precio interno</label><br>
+            <input type="text" placeholder="Costo Alojamiento" required id="costo-alojamiento">
+          </td>
         </tr>
+
+        <!-- Traslado row: label "Precio interno" only -->
         <tr>
           <td>Traslado</td>
-          <td><input type="text" placeholder="Costo Traslado" required id="costo-traslado"></td>
-        </tr>
-<!-- In the "Tours" row -->
-<tr>
-    <td>Tours</td>
-    <td>
-      <div class="multi-select" id="tour-dropdown">
-        <div class="select-box">Seleccionar tours <i class="fas fa-chevron-down"></i></div>
-        <div class="dropdown">
-          <!-- Each label has a data-price attribute on the checkbox -->
-          <label>
-            City Tour (COP 20000)
-            <input type="checkbox" value="city-tour" data-price="20000">
-          </label>
-          <label>
-            Guatapé (COP 35000)
-            <input type="checkbox" value="guatape" data-price="35000">
-          </label>
-          <label>
-            Bogotá (COP 40000)
-            <input type="checkbox" value="bogota" data-price="40000">
-          </label>
-          <label>
-            San Andrés (COP 40000)
-            <input type="checkbox" value="san-andres" data-price="40000">
-          </label>
-        </div>
-      </div>
-    </td>
-  </tr>
-  
-        <tr>
-          <td>Costos adicionales</td>
           <td>
-            <input type="text" placeholder="Total" required id="costo-adicional-total" style="width: 50%">
-            <input type="text" placeholder="Descripción" required style="width: 50%">
+            <label>Precio interno</label><br>
+            <input type="text" placeholder="Costo Traslado" required id="costo-traslado">
           </td>
         </tr>
+
+        <!-- Combined row for "Alojamiento + Traslado": label "Precio de venta" -->
         <tr>
-          <td>Total servicios</td>
+          <td>Alojamiento + Traslado</td>
           <td>
-            <div style="display: flex; align-items: center;">
-              <input type="text" id="total-servicios" placeholder="Total Servicios" readonly>
-              <span id="currency-symbol" style="margin-left: 5px;">$</span>
-            </div>
+            <label>Precio de venta</label><br>
+            <input type="text" placeholder="Precio de venta" required id="venta-alojamiento-traslado">
           </td>
         </tr>
+
+        <!-- Tours row remains unchanged -->
+        <tr>
+            <td>Tours y paquetes</td>
+            <td>
+              <div class="multi-select" id="tour-dropdown">
+                <div class="select-box">Seleccionar<i class="fas fa-chevron-down"></i></div>
+                <div class="dropdown">
+                  <!-- Tour #1: Two data attributes for internal/venta prices -->
+                  <label>
+                    City Tour 
+                    <small>(Interno: COP 84,000 / Venta: COP 120,000)</small>
+                    <input
+                      type="checkbox"
+                      value="city-tour"
+                      data-price-interno="84000"
+                      data-price-venta="120000"
+                    />
+                  </label>
+          
+                  <!-- Tour #2 -->
+                  <label>
+                    Guatapé
+                    <small>(Interno: COP 86,000 / Venta: COP 128,000)</small>
+                    <input
+                      type="checkbox"
+                      value="guatape"
+                      data-price-interno="86000"
+                      data-price-venta="128000"
+                    />
+                  </label>
+          
+                  <!-- Tour #3 -->
+                  <label>
+                    Hacienda Nápoles
+                    <small>(Interno: COP 196,000 / Venta: COP 260,000)</small>
+                    <input
+                      type="checkbox"
+                      value="bogota"
+                      data-price-interno="196000"
+                      data-price-venta="260000"
+                    />
+                  </label>
+          
+                  <!-- Tour #4 -->
+                  <label>
+                    Santa Fé de Antioquia
+                    <small>(Interno: COP 90,000 / Venta: COP 140,000)</small>
+                    <input
+                      type="checkbox"
+                      value="san-andres"
+                      data-price-interno="90000"
+                      data-price-venta="140000"
+                    />
+                  </label>
+
+                  <!-- Tour #5 -->
+                  <label>
+                    Chiva Rumbera
+                    <small>(Interno: COP 40,000 / Venta: COP 72,000)</small>
+                    <input
+                      type="checkbox"
+                      value="san-andres"
+                      data-price-interno="40000"
+                      data-price-venta="72000"
+                    />
+                  </label>
+
+                  <!-- Tour #6 -->
+                  <label>
+                    Tour Rio Claro
+                    <small>(Interno: COP 196,000 / Venta: COP 260,000)</small>
+                    <input
+                      type="checkbox"
+                      value="san-andres"
+                      data-price-interno="196000"
+                      data-price-venta="260000"
+                    />
+                  </label>
+
+                  <!-- Tour #7 -->
+                  <label>
+                    Tour Silletero
+                    <small>(Interno: COP 97,000 / Venta: COP 160,000)</small>
+                    <input
+                      type="checkbox"
+                      value="san-andres"
+                      data-price-interno="97000"
+                      data-price-venta="160000"
+                    />
+                  </label>
+
+                <!-- Tour #8 -->
+                  <label>
+                    Tour Café
+                    <small>(Interno: COP 169,000 / Venta: COP 220,000)</small>
+                    <input
+                      type="checkbox"
+                      value="san-andres"
+                      data-price-interno="196000"
+                      data-price-venta="220000"
+                    />
+                  </label>
+
+                </div>
+              </div>
+            </td>
+          </tr>
+          
+
+          <tr>
+            <td>Costos adicionales</td>
+            <td>
+              <!-- Group "Precio interno" and "Precio de venta" side by side -->
+              <div style="display: flex; gap: 20px; align-items: flex-start;">
+                <!-- First column for Precio interno -->
+                <div>
+                  <label>Precio interno</label><br>
+                  <input
+                    type="text"
+                    placeholder="Total"
+                    required
+                    id="costo-adicional-total"
+                    style="width: 140px;"
+                  >
+                </div>
+          
+                <!-- Second column for Precio de venta -->
+                <div>
+                  <label>Precio de venta</label><br>
+                  <input
+                    type="text"
+                    placeholder="Precio de venta"
+                    required
+                    id="venta-adicional"
+                    style="width: 140px;"
+                  >
+                </div>
+              </div>
+          
+              <!-- Below, the existing "Descripción" input remains as is -->
+              <br>
+              <input
+                type="text"
+                placeholder="Descripción"
+                required
+                style="width: 50%;"
+              >
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Total en servicios por persona </td>
+            <td>
+              <div style="display: flex; gap: 30px; align-items: flex-start;">
+                <!-- Left: Output for internal total -->
+                <div style="display: flex; flex-direction: column;">
+                  <label style="font-size: 13px;">Precio interno en COP</label>
+                  <input
+                    type="text"
+                    id="total-servicios"
+                    placeholder="Suma interno"
+                    readonly
+                    style="width: 120px;"
+                  >
+                </div>
+          
+                <!-- Right: Output for "precio de venta" in USD -->
+                <div style="display: flex; flex-direction: column;">
+                  <label style="font-size: 13px;">Precio de venta en USD</label>
+                  <input
+                    type="text"
+                    id="total-venta-usd"
+                    placeholder="Venta USD"
+                    readonly
+                    style="width: 130px;"
+                  >
+                </div>
+              </div>
+            </td>
+          </tr>
+          
       </table>
 
       <!-- CSS for Tours Dropdown -->
-      <style>
+      <style> 
         .multi-select {
           position: relative;
           width: 100%;
         }
-
+      
         .multi-select .select-box {
           display: flex;
           justify-content: space-between;
@@ -164,7 +317,7 @@
           background-color: #fff;
           cursor: pointer;
         }
-
+      
         .multi-select .dropdown {
           position: absolute;
           top: 100%;
@@ -179,7 +332,7 @@
           display: none;
           box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
-
+      
         .multi-select .dropdown label {
           display: flex;
           justify-content: space-between;
@@ -188,15 +341,22 @@
           cursor: pointer;
           font-size: 14px;
         }
-
+      
+        /* Light blue hover color */
         .multi-select .dropdown label:hover {
-          background-color: #f0f0f0;
+          background-color: #cceeff;
         }
-
+      
+        /* Add spacing between tour name and the <small> text */
+        .multi-select .dropdown label small {
+          margin-left: 12px; /* Increase as desired for more spacing */
+        }
+      
         .multi-select .dropdown input[type="checkbox"] {
           margin-left: 10px;
         }
       </style>
+      
 
       <!-- JS for Tours Dropdown -->
       <script>
@@ -218,40 +378,68 @@
       </script>
     </section>
 
-    <!-- Quotation Calculation -->
-    <section class="quotation-calculation">
-      <h3>Cálculo de cotización</h3>
-      <table>
-        <tr>
-          <td>Número de personas</td>
-          <td><input type="number" id="numero-personas" placeholder="Ingrese la cantidad" required></td>
-        </tr>
-        <tr>
-          <td>Precio por persona</td>
-          <td><input type="text" id="precio-por-persona" placeholder="0.00" readonly></td>
-        </tr>
-        <tr>
-          <td>Monto total de la cotización</td>
-          <td>
-            <div style="display: flex; align-items: center;">
-              <input type="text" id="monto-cotizacion" placeholder="0.00" readonly>
-              <span id="currency-cotizacion-symbol" style="margin-left: 5px;">$</span>
+<!-- Cálculo de cotización -->
+<section class="quotation-calculation">
+    <h3>Cálculo de cotización</h3>
+    <table>
+      <!-- Replace the original "Número de personas" row with the snippet below -->
+      <tr>
+        <td>Número de personas</td>
+        <td>
+          <!-- Container for the number input + two output fields -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            
+            <!-- (1) The input field for número de personas -->
+            <input
+              type="number"
+              id="numero-personas"
+              placeholder="Ingrese la cantidad"
+              required
+              style="width: 150px;"
+            >
+            
+            <!-- (2) A row containing both new output fields side by side -->
+            <div style="display: flex; gap: 20px;">
+              
+              <!-- Left column: "Precio interno en COP" -->
+              <div style="display: flex; flex-direction: column;">
+                <label style="font-size: 13px;">Precio interno en COP</label>
+                <input
+                  type="text"
+                  id="precio-interno-cop"
+                  placeholder="0.00"
+                  readonly
+                  style="width: 130px;"
+                >
+              </div>
+              
+              <!-- Right column: "Precio de venta en COP" -->
+              <div style="display: flex; flex-direction: column;">
+                <label style="font-size: 13px;">Precio de venta en COP</label>
+                <input
+                  type="text"
+                  id="precio-venta-cop"
+                  placeholder="0.00"
+                  readonly
+                  style="width: 130px;"
+                >
+              </div>
             </div>
-          </td>
-        </tr>
-      </table>
-    </section>
+          </div>
+        </td>
+      </tr>
+  
+    </table>
+  </section>
+  
 
     <!-- Payments and Profits -->
     <section class="payments-profits">
-      <h3>Pagos y ganancias</h3>
+      <h3>Utilidades / Ganancias de la empresa</h3>
       <table>
+
         <tr>
-          <td>Monto pagado por el cliente</td>
-          <td><input type="text" id="monto-cliente" required></td>
-        </tr>
-        <tr>
-          <td>Ganancias / Utilidades</td>
+          <td>Ganancias / Utilidades (COP)</td>
           <td>
             <div style="display: flex; align-items: center;">
               <input type="text" id="ganancias" placeholder="0.00" readonly>
@@ -260,7 +448,7 @@
           </td>
         </tr>
         <tr>
-          <td>Utilidad por persona</td>
+          <td>Utilidad por persona (COP)</td>
           <td>
             <div style="display: flex; align-items: center;">
               <input type="text" id="utilidad-persona" placeholder="0.00" readonly>
